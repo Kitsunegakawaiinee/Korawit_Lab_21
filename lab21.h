@@ -4,6 +4,7 @@
 #include<cstdlib>
 #include<iomanip>
 
+#define elif else if
 using namespace std;
 
 class Unit{
@@ -66,7 +67,56 @@ void Unit::newTurn(){
 
 
 /////////////////////////////////////////////////////////////////////////////////////
-//Write function members isDead(), guard(), heal(), beAttacked(), and attack() here//
+//Write function members isDead()^^, guard() ^^, heal(), beAttacked(), and attack() ^^ here//
+void Unit::guard()
+{
+	guard_on = true;
+}
+
+int Unit::beAttacked(int oppatk)
+{
+	int for_return = (guard_on)? (oppatk-def)/3 : (oppatk-def);
+
+    if(for_return < 0) for_return = 0;
+
+	hp -= for_return;
+
+	return for_return;
+}
+
+int Unit::attack(Unit &target){
+	return target.beAttacked(atk);
+}
+
+int Unit::heal()
+{
+	int Heal = (rand()%21)+10;
+
+	if (hp == hpmax)
+	{
+		Heal = 0;
+		return Heal;
+	} 
+	elif ((hp+Heal) > hpmax) 
+	{
+		Heal = (hpmax - hp);
+		hp = hpmax;
+	}
+	else
+	{
+		hp += Heal;
+	}
+	return Heal;
+}
+
+bool Unit::isDead()
+{
+    bool a;
+    
+    a = (hp < 0 || hp == 0)? true: false;
+    
+    return a;
+}
 /////////////////////////////////////////////////////////////////////////////////////
 
 

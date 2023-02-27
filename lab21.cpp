@@ -1,4 +1,4 @@
-// Please include header (lab21.h) here.
+#include "lab21.h"
 
 int main(){
 	srand(time(0));
@@ -9,6 +9,7 @@ int main(){
 	char player_action = '\0',monster_action = '\0';
 	int p = 0, m = 0;
 	while(true){
+		system("cls");
 		mons.newTurn();	
 		hero.newTurn();			
 		mons.showStatus();
@@ -20,8 +21,8 @@ int main(){
 		player_action = toupper(player_action);
 		if(player_action == 'E') break; 
 		
-		int temp = rand()%3;
-		if(temp <= 1) monster_action = 'A';
+		int temp = rand()%3; //2 1 0
+		if(temp <= 1) monster_action = 'A'; // 1 0
 		else if(temp == 2) monster_action = 'G';
 		
 		if(player_action == 'G') hero.guard();
